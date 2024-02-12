@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FDFEFE;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.l-header_container {
+  position: relative;
+  width: 100%;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.l-title_area {
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  overflow: hidden;
+  color: rgb(135, 135, 135);
+  font-size: 90px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title span {
+  display: block;
+  transform: translate(0, 105%);
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.title.-visible span {
+  transform: translate(0, 0);
+}
+
+.title span:nth-child(2) {
+  transition-delay: 0.06s;
+}
+.title span:nth-child(3) {
+  transition-delay: 0.12s;
+}
+.title span:nth-child(4) {
+  transition-delay: 0.18s;
+}
+.title span:nth-child(5) {
+  transition-delay: 0.24s;
+}
+.title span:nth-child(6) {
+  transition-delay: 0.30s;
+}
+.title span:nth-child(7) {
+  transition-delay: 0.36s;
+}
+.title span:nth-child(8) {
+  transition-delay: 0.42s;
+}
+.title span:nth-child(9) {
+  transition-delay: 0.48s;
+}
+
+.line {
+  width: 100%; /* 画面幅いっぱい */
+  height: 1px; /* 細い横線のための高さ */
+  background-color: #000; /* 横線の色 */
+  margin: 0; /* 外側の余白をなくす */
+}
