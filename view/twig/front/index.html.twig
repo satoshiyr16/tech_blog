@@ -21,7 +21,10 @@
       <span>G</span>
     </h1>
   </div>
-<div class="line"></div>
+  <div class="line"></div>
+  {% for post in title %}
+    <h1>{{ post.title }}</h1>
+  {% endfor %}
 </div>
 <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ JS_FRONT_DIR }}/index.js"></script>
