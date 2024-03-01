@@ -1,0 +1,26 @@
+.l-container {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.p-edit_area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-step {
+  position: absolute;
+  width: 100%;
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+}
+.js-form_step_active {
+  transform: translateX(0%);
+}
+.js-form_step_left {
+  transform: translateX(-100%);
+}
+.js-form_step_right {
+  transform: translateX(100%);
+}

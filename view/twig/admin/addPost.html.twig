@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/addPost.css">
+    <script src="https://cdn.tiny.cloud/1/dtnfhme7mtnqfb2jb8u57wx7y6kqydp7io6i7a2jf6g8y77r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '#mytextarea',
+        menubar: false,
+        plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons accordion',
+        toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        contextmenu: "cut copy paste | bold italic underline | link image | bullist numlist",
+        toolbar_mode: 'sliding',
+      });
+      document.addEventListener('DOMContentLoaded', function(){
+        const firstStep = document.querySelector('.p-form_first_step');
+        const secondStep = document.querySelector('.p-form_second_step');
+        const firstStepBtn = document.getElementById('firstStepBtn');
+        const secondStepBtn = document.getElementById('secondStepBtn');
+
+        firstStep.classList.add('js-form_step_active');
+        secondStep.classList.add('js-form_step_left');
+        secondStep.classList.remove('js-form_step_active');
+
+        firstStepBtn.addEventListener('click', function() {
+          firstStep.classList.add('js-form_step_active');
+          firstStep.classList.remove('js-form_step_left','js-form_step_right');
+          secondStep.classList.add('js-form_step_left');
+          secondStep.classList.remove('js-form_step_active');
+
+          firstStepBtn.style.display = 'none';
+          secondStepBtn.style.display = 'block';
+        });
+
+        secondStepBtn.addEventListener('click', function() {
+          firstStep.classList.add('js-form_step_right');
+          firstStep.classList.remove('js-form_step_active');
+          secondStep.classList.add('js-form_step_active');
+          secondStep.classList.remove('js-form_step_left', 'js-form_step_right');
+
+          firstStepBtn.style.display = 'block';
+          secondStepBtn.style.display = 'none';
+        });
+
+      });
+
+  </script>
+  </head>
+
+  <body>
+  <div class="l-container">
+    <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}/addPost.php">
+    <div class="p-form_first_step form-step">
+      <input type="button" id="secondStepBtn" value="次へ →">
+      <input type="text" name="title" placeholder="タイトル">
+      <input type="text" name="tags" placeholder="タグ（カンマ区切り）">
+    </div>
+    <div class="p-form_second_step form-step form-step-active">
+      <div class="p-edit_area">
+        <textarea
+          id="mytextarea"
+          name="postContent"
+          placeholder="ここに内容を入力してください"
+          style="width: 70%; height: 70vh;"
+        >
+        </textarea>
+      </div>
+      <input type="button" id="firstStepBtn" value="← 戻る" style="display: none;">
+      <input type="submit" value="Submit">
+    </div>
+    </form>
+  </div>
+  </body>
+</html>
