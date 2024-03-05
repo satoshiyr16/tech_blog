@@ -92,11 +92,9 @@ class dbCommand
   }
 
 
-  public function select($table, $column = '', $where = '', $arrVal = [])
+  public function select($table, $column = '', $where = '', $arrVal = [], $orderby = '')
   {
-      // SQL文を生成します。
-      $sql = $this->getSql('select', $table, $where, $column);
-
+      $sql = $this->getSql('select', $table, $where, $column, $orderby);
       // mysqli prepare statement
       $stmt = $this->db_con->prepare($sql);
 
@@ -127,7 +125,6 @@ class dbCommand
 
       // SQLを実行
       $stmt->execute();
-
       // 結果を取得
       $result = $stmt->get_result();
 
@@ -143,7 +140,7 @@ class dbCommand
   }
 
 
-  private function getSql($type, $table, $where = '', $column = '')
+  private function getSql($type, $table, $where = '', $column = '', $orderby = '')
   {
     switch($type) {
       case 'select':
@@ -159,8 +156,8 @@ class dbCommand
     }
 
     $whereSQL = ($where !== '') ? ' WHERE ' . $where : '';
-    $other = $this->groupby . " " . $this->order . " " . $this->limit . " " . $this->offset;
-    $sql = " SELECT " . $columnKey . " FROM " . $table . $whereSQL . $other;
+    $orderbySQL = ($orderby !== '') ? ' ORDER BY ' . $orderby : '';
+    $sql = " SELECT " . $columnKey . " FROM " . $table . $whereSQL . $orderbySQL;
 
     return $sql;
   }
