@@ -16,9 +16,12 @@ $twig = new \Twig_Environment($loader, [
   'cache' => autoload::CACHE_DIR
 ]);
 
-$title = $db->select('post', 'title', '', ['post_id = ?'], [1]);
+$posts = $db->select('post', '*', '', [], 'updated_at DESC');
 
 $twig->addGlobal('JS_FRONT_DIR', autoload::JS_FRONT_DIR);
 $twig->addGlobal('CSS_FRONT_DIR', autoload::CSS_FRONT_DIR);
+$twig->addGlobal('IMAGE_DIR', autoload::IMAGE_DIR);
+$twig->addGlobal('CSS_MODULE_DIR', autoload::CSS_MODULE_DIR);
+$twig->addGlobal('APP_URL', autoload::APP_URL);
 $template = $twig->load('index.html.twig');
-echo $template->render(['title' => $title]);
+echo $template->render(['posts' => $posts]);
