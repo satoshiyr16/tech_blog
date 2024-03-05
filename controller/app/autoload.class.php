@@ -15,15 +15,17 @@ class autoload
 
   const APP_URL = 'http://localhost:8888/tech_blog/';
   const APP_DIR = '/Applications/MAMP/htdocs/tech_blog/';
-  const CONTROLLER_APP_DIR = self::APP_DIR . 'controller/app';
-  const CONTROLLER_ADMIN_DIR = self::APP_URL . 'controller/admin';
-  const CONTROLLER_FRONT_DIR = self::APP_URL . 'controller/front';
+  const CONTROLLER_APP_DIR = self::APP_DIR . 'controller/app/';
+  const CONTROLLER_ADMIN_DIR = self::APP_URL . 'controller/admin/';
+  const CONTROLLER_FRONT_DIR = self::APP_URL . 'controller/front/';
   const TWIG_FRONT_DIR = self::APP_DIR . 'view/twig/front/';
   const TWIG_ADMIN_DIR = self::APP_DIR . 'view/twig/admin/';
-  const JS_FRONT_DIR = self::APP_URL . 'view/js/front';
-  const CSS_FRONT_DIR = self::APP_URL . 'view/css/front';
-  const JS_ADMIN_DIR = self::APP_URL . 'view/js/admin';
-  const CSS_ADMIN_DIR = self::APP_URL . 'view/css/admin';
+  const JS_FRONT_DIR = self::APP_URL . 'view/js/front/';
+  const CSS_FRONT_DIR = self::APP_URL . 'view/css/front/';
+  const JS_ADMIN_DIR = self::APP_URL . 'view/js/admin/';
+  const CSS_ADMIN_DIR = self::APP_URL . 'view/css/admin/';
+  const CSS_MODULE_DIR = self::APP_URL . 'view/css/';
+  const IMAGE_DIR = self::APP_URL . 'view/images/';
   const CACHE_DIR = false;
   // const ENTRY_URL = self::APP_URL . 'shopping/';
 
