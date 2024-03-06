@@ -1,0 +1,77 @@
+{% extends "app.twig" %}
+{% block title %}管理側{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/addPost.css">
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/commons/progressBar.css">
+  <script src="https://cdn.tiny.cloud/1/dtnfhme7mtnqfb2jb8u57wx7y6kqydp7io6i7a2jf6g8y77r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+      menubar: false,
+      plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons accordion',
+      toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+      quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+      contextmenu: "cut copy paste | bold italic underline | link image | bullist numlist",
+      toolbar_mode: 'sliding',
+    });
+  </script>
+{% endblock %}
+{% block content %}
+<div class="l-container">
+  <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}/addPost.php">
+  <div class="l-form_first_area form-step">
+    <div class="l-progressbar_area">
+      <ul class="progressbar">
+        <li class="active">タイトル・タグ</li>
+        <li>本文</li>
+        <li>完了</li>
+      </ul>
+    </div>
+    <div class="l-input_first_area">
+      <div class="l-input_group">
+        <h2>記事投稿</h2>
+        <div class="title_group">
+          <p>タイトルを入力してください</p>
+          <input type="text" class="input_title" name="title" >
+        </div>
+        <div class="tag_group">
+          <p>タグを追加してください</p>
+          <input type="text" class="input_tag" name="tags" placeholder="タグ（カンマ区切り）">
+        </div>
+      </div>
+      <a class="nextBtn" id="secondStepBtn">
+        <span class="arrow"><i class="fa-solid fa-angles-right fa-4x"></i></span>
+      </a>
+    </div>
+  </div>
+  <div class="l-form_second_area form-step form-step-active">
+    <ul class="progressbar">
+      <li class="complete">タイトル・タグ</li>
+      <li class="active">本文</li>
+      <li>完了</li>
+    </ul>
+    <div class="l-edit_area">
+      <textarea
+        id="mytextarea"
+        name="postContent"
+        placeholder="ここに内容を入力してください"
+        style="width: 70%; height: 70vh;"
+      >
+      </textarea>
+    </div>
+    <input type="button" id="firstStepBtn" value="← 戻る" style="display: none;">
+    <input type="submit" value="Submit">
+  </div>
+  {# <ul class="progressbar">
+  <li class="complete">タイトル・タグ</li>
+  <li class="complete">本文</li>
+  <li class="active">完了</li>
+</ul> #}
+  </form>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+  <script src="{{ JS_ADMIN_DIR }}/addPost.js"></script>
+{% endblock %}
