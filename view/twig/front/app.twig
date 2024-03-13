@@ -1,0 +1,26 @@
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}TECH BLOG{% endblock %}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link rel="stylesheet" href="{{ CSS_MODULE_DIR }}/reset.css">
+  <link rel="stylesheet" href="{{ CSS_MODULE_DIR }}/module.css">
+  <link rel="stylesheet" href="{{ CSS_FRONT_DIR }}/commons/particle.css">
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  {% block content %}
+  {% endblock %}
+
+  <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/a6492244a5.js" crossorigin="anonymous"></script>
+  <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{{ JS_FRONT_DIR }}/commons/particle.js"></script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>
