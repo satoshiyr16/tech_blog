@@ -23,5 +23,5 @@ $twig->addGlobal('CSS_FRONT_DIR', autoload::CSS_FRONT_DIR);
 $twig->addGlobal('IMAGE_DIR', autoload::IMAGE_DIR);
 $twig->addGlobal('CSS_MODULE_DIR', autoload::CSS_MODULE_DIR);
 $twig->addGlobal('APP_URL', autoload::APP_URL);
-$template = $twig->load('index.html.twig');
+$template = $twig->load('index.twig');
 echo $template->render(['posts' => $posts]);
