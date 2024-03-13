@@ -10,12 +10,6 @@
   width: 100%;
 }
 
-.l-input_first_area {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 .l-progressbar_area {
   width: 100%;
   height: 15%;
@@ -90,16 +84,61 @@
 
 .arrow {
   display: block;
-  padding-bottom: 200px;
 }
 
-.l-edit_area {
+.prevBtn {
+  height: 100%;
+  width: 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.form-step {
+.prevBtn:hover {
+  background-color: #f1f1f1;
+}
+
+.arrow {
+  display: block;
+}
+
+.l-form_second_area {
+  height: 100%;
+  width: 100%;
+}
+
+.l-edit_group {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-edit_group h2 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.l-submit_area {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: end;
+}
+
+.submitBtn {
+  height: 50px;
+  width: 150px;
+  margin-right: 20px;
+  color: #e76f51;
+}
+
+.form_step {
   position: absolute;
   width: 100%;
   transform: translateX(100%);

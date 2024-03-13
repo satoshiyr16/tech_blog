@@ -19,39 +19,40 @@
 {% endblock %}
 {% block content %}
 <div class="l-container">
-  <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}/addPost.php">
-  <div class="l-form_first_area form-step">
+  <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}/addPost.php" name="post">
+  <div class="l-form_first_area form_step">
     <div class="l-progressbar_area">
-      <ul class="progressbar">
+      <ul class="progressbar m-40">
         <li class="active">タイトル・タグ</li>
         <li>本文</li>
         <li>完了</li>
       </ul>
     </div>
-    <div class="l-input_first_area">
-      <div class="l-input_group">
-        <h2>記事投稿</h2>
-        <div class="title_group">
-          <p>タイトルを入力してください</p>
-          <input type="text" class="input_title" name="title" >
-        </div>
-        <div class="tag_group">
-          <p>タグを追加してください</p>
-          <input type="text" class="input_tag" name="tags" placeholder="タグ（カンマ区切り）">
-        </div>
+    <div class="l-input_group">
+      <h2>記事投稿</h2>
+      <div class="title_group">
+        <p>タイトルを入力してください</p>
+        <input type="text" class="input_title" name="title" >
       </div>
-      <a class="nextBtn" id="secondStepBtn">
-        <span class="arrow"><i class="fa-solid fa-angles-right fa-4x"></i></span>
-      </a>
+      <div class="tag_group">
+        <p>タグを追加してください</p>
+        <input type="text" class="input_tag" name="tags" placeholder="タグ（カンマ区切り）">
+      </div>
     </div>
+    <a class="nextBtn" id="secondStepBtn">
+      <span class="arrow"><i class="fa-solid fa-angles-right fa-4x"></i></span>
+    </a>
   </div>
-  <div class="l-form_second_area form-step form-step-active">
-    <ul class="progressbar">
-      <li class="complete">タイトル・タグ</li>
-      <li class="active">本文</li>
-      <li>完了</li>
-    </ul>
-    <div class="l-edit_area">
+  <div class="l-form_second_area form_step">
+    <div class="l-progressbar_area">
+      <ul class="progressbar m-40">
+        <li class="complete">タイトル・タグ</li>
+        <li class="active">本文</li>
+        <li>完了</li>
+      </ul>
+    </div>
+    <div class="l-edit_group">
+      <h2>本文</h2>
       <textarea
         id="mytextarea"
         name="postContent"
@@ -60,10 +61,14 @@
       >
       </textarea>
     </div>
-    <input type="button" id="firstStepBtn" value="← 戻る" style="display: none;">
-    <input type="submit" value="Submit">
+    <div class="l-submit_area">
+      <a href="#" class="submitBtn" onclick="document.post.submit();"><i class="fa-solid fa-paper-plane"></i>送信する</a>
+    </div>
+    <a class="prevBtn" id="firstStepBtn">
+      <span class="arrow"><i class="fa-solid fa-angles-left fa-4x"></i></span>
+    </a>
   </div>
-  {# <ul class="progressbar">
+  {# <ul class="progressbar m-40">
   <li class="complete">タイトル・タグ</li>
   <li class="complete">本文</li>
   <li class="active">完了</li>
