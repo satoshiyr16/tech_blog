@@ -1,0 +1,49 @@
+{% extends "app.twig" %}
+{% block title %}管理画面 -ホーム-{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/index.css">
+{% endblock %}
+{% block content %}
+<div class="l-main_content_area">
+  <div class="l-content_area">
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-envelope-open-text fa-8x i_content rotation"></i>
+      <p>投稿一覧</p>
+    </a>
+    <a class="con_link" href="{{ APP_URL }}controller/admin/addPost.php">
+      <i class="fa-solid fa-file fa-8x i_post rotation"></i>
+      <p>新規投稿</p>
+    </a>
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-pen-to-square fa-8x i_edit rotation"></i>
+      <p>編集</p>
+    </a>
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-magnifying-glass fa-8x i_search rotation"></i>
+      <p>検索</p>
+    </a>
+  </div>
+  <div class="l-content_area">
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-star fa-8x i_favorite rotation"></i>
+      <p>おすすめ記事設定</p>
+    </a>
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-user fa-8x i_profile rotation"></i>
+      <p>プロフィール</p>
+    </a>
+    <a class="con_link" href="#">
+      <i class="fa-brands fa-instagram fa-8x i_sns rotation"></i>
+      <p>SNS設定</p>
+    </a>
+    <a class="con_link" href="#">
+      <i class="fa-solid fa-envelope fa-8x i_mail rotation"></i>
+      <p>お問い合わせ</p>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+{% endblock %}
