@@ -1,0 +1,21 @@
+{% extends "app.twig" %}
+
+{% block title %}管理 ユーザー登録{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}authentications/register.css">
+{% endblock %}
+{% block content %}
+<h2>ユーザー登録</h2>
+<form method="post" action="{{ CONTROLLER_ADMIN_DIR }}authentications/register.php">
+  <label for="email">ユーザー名:</label>
+  <input type="text" name="userName" required>
+
+  <label for="email">メールアドレス:</label>
+  <input type="email" name="email" required>
+
+  <label for="password">パスワード:</label>
+  <input type="password" name="password" required>
+
+  <input type="submit" name="register" value="登録">
+</form>
+{% endblock %}

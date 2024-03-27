@@ -1,0 +1,40 @@
+.l-list_page_area {
+  height: 100vh;
+  width: 100%;
+}
+
+.l-post_list_area {
+  height: 50vh;
+  width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+
+.post_content {
+  width: 90%;
+  min-height: 100px;
+  display: flex;
+  margin: 10px auto;
+  align-items: center;
+}
+
+.img {
+  flex: 0 0 15%;
+  height: 100%;
+  width: 20%;
+}
+
+.title {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.date_btn_group {
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}

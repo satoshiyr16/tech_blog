@@ -1,5 +1,5 @@
-{% extends "app.twig" %}
-{% block title %}管理側{% endblock %}
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 投稿登録{% endblock %}
 {% block head %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/addPost.css">
@@ -17,9 +17,9 @@
     });
   </script>
 {% endblock %}
-{% block content %}
-<div class="l-container">
-  <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}/addPost.php" name="post">
+{% block loginedContent %}
+<div class="l-add_post_area">
+  <form method="post" action="{{ CONTROLLER_ADMIN_DIR }}addPost.php" name="post">
   <div class="l-form_first_area form_step">
     <div class="l-progressbar_area">
       <ul class="progressbar m-40">
@@ -62,7 +62,8 @@
       </textarea>
     </div>
     <div class="l-submit_area">
-      <a href="#" class="submitBtn" onclick="document.post.submit();"><i class="fa-solid fa-paper-plane"></i>送信する</a>
+      <input type="submit" name="send" value="送信する" class="submitBtn">
+      {# <a href="#" class="submitBtn" onclick="document.post.submit();"><i class="fa-solid fa-paper-plane"></i>送信する</a> #}
     </div>
     <a class="prevBtn" id="firstStepBtn">
       <span class="arrow"><i class="fa-solid fa-angles-left fa-4x"></i></span>

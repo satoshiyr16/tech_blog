@@ -1,13 +1,13 @@
-{% extends "app.twig" %}
-{% block title %}管理画面 -ホーム-{% endblock %}
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 -ホーム-{% endblock %}
 {% block head %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/index.css">
 {% endblock %}
-{% block content %}
+{% block loginedContent %}
 <div class="l-main_content_area">
   <div class="l-content_area">
-    <a class="con_link" href="#">
+    <a class="con_link" href="{{ APP_URL }}controller/admin/list.php">
       <i class="fa-solid fa-envelope-open-text fa-8x i_content rotation"></i>
       <p>投稿一覧</p>
     </a>
@@ -16,10 +16,10 @@
       <p>新規投稿</p>
     </a>
     <a class="con_link" href="#">
-      <i class="fa-solid fa-pen-to-square fa-8x i_edit rotation"></i>
-      <p>編集</p>
+      <i class="fa-solid fa-chart-simple fa-8x i_graph rotation"></i>
+      <p>データ</p>
     </a>
-    <a class="con_link" href="#">
+    <a class="con_link" href="{{ APP_URL }}controller/admin/search.php">
       <i class="fa-solid fa-magnifying-glass fa-8x i_search rotation"></i>
       <p>検索</p>
     </a>
@@ -34,12 +34,12 @@
       <p>プロフィール</p>
     </a>
     <a class="con_link" href="#">
-      <i class="fa-brands fa-instagram fa-8x i_sns rotation"></i>
-      <p>SNS設定</p>
-    </a>
-    <a class="con_link" href="#">
       <i class="fa-solid fa-envelope fa-8x i_mail rotation"></i>
       <p>お問い合わせ</p>
+    </a>
+    <a class="con_link" href="{{ APP_URL }}controller/admin/authentications/logout.php">
+      <i class="fa-solid fa-right-from-bracket fa-8x i_logout rotation"></i>
+      <p>ログアウト</p>
     </a>
   </div>
 </div>

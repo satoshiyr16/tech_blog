@@ -74,91 +74,154 @@ class dbCommand
     call_user_func_array(array($stmt, 'bind_param'), $params);
 
     $res = $stmt->execute();
-    if (!$res) {
+    if ($res) {
+      $insertId = $this->db_con->insert_id;
+      $stmt->close();
+      return $insertId;
+    } else {
       error_log("Execute failed: " . $stmt->error);
+      $stmt->close();
+      return false; // 挿入に失敗した場合はfalseを返す
+    }
+  }
+
+  public function select($table, $column = '', $where = '', $arrVal = [], $orderby = '', $limit = '')
+  {
+    $sql = $this->getSql('select', $table, $where, $column, $orderby, $limit);
+    $stmt = $this->db_con->prepare($sql);
+    // パラメータがある場合はバインドする。
+    if (!empty($arrVal)) {
+      $types = ''; // パラメータの型を格納する文字列を初期化
+      foreach ($arrVal as $param) {
+        // パラメータの型に応じて型指定子を追加
+        if (is_float($param)) {
+          $types .= 'd'; // double
+        } elseif (is_int($param)) {
+          $types .= 'i'; // integer
+        } else {
+          $types .= 's'; // string
+        }
+      }
+
+      // bind_paramの引数を準備（型指定子とパラメータの値）
+      $bindParams = [];
+      $bindParams[] = &$types; // 参照渡しで型指定子を最初に追加
+      foreach ($arrVal as $key => &$param) {
+        $bindParams[] = &$param; // 各パラメータの参照を追加
+      }
+
+      // bind_paramを呼び出し
+      call_user_func_array([$stmt, 'bind_param'], $bindParams);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = $row;
     }
 
     $stmt->close();
 
-    return $res;
+    return $data;
   }
 
-  private function catchError($errArr = [])
+  private function getSql($type, $table, $where = '', $column = '', $orderby = '', $limit = '')
   {
-    // errorMessageが2番目に格納されている
-    $errMsg = (!empty($errArr[2])) ? $errArr[2] : "";
-    // exitと同じ
-    die("SQLエラーが発生しました。" . $errArr[2]);
-  }
-
-
-  public function select($table, $column = '', $where = '', $arrVal = [], $orderby = '')
-  {
-      $sql = $this->getSql('select', $table, $where, $column, $orderby);
-      // mysqli prepare statement
-      $stmt = $this->db_con->prepare($sql);
-
-      // パラメータがある場合はバインドします。
-      if (!empty($arrVal)) {
-        $types = ''; // パラメータの型を格納する文字列を初期化
-        foreach ($arrVal as $param) {
-            // パラメータの型に応じて型指定子を追加
-            if (is_float($param)) {
-                $types .= 'd'; // double
-            } elseif (is_int($param)) {
-                $types .= 'i'; // integer
-            } else {
-                $types .= 's'; // string
-            }
-        }
-
-        // bind_paramの引数を準備（型指定子とパラメータの値）
-        $bindParams = [];
-        $bindParams[] = &$types; // 参照渡しで型指定子を最初に追加
-        foreach ($arrVal as $key => &$param) {
-            $bindParams[] = &$param; // 各パラメータの参照を追加
-        }
-
-        // bind_paramを呼び出し
-        call_user_func_array([$stmt, 'bind_param'], $bindParams);
-    }
-
-      // SQLを実行
-      $stmt->execute();
-      // 結果を取得
-      $result = $stmt->get_result();
-
-      $data = [];
-      while ($row = $result->fetch_assoc()) {
-          $data[] = $row;
-      }
-
-      // ステートメントを閉じる
-      $stmt->close();
-
-      return $data;
-  }
-
-
-  private function getSql($type, $table, $where = '', $column = '', $orderby = '')
-  {
-    switch($type) {
+    switch ($type) {
       case 'select':
         $columnKey = ($column !== '') ? $column : "*";
-      break;
+        break;
 
       case 'count':
         $columnKey = 'COUNT(*) AS NUM';
-      break;
+        break;
 
       default:
-      break;
+        break;
     }
 
     $whereSQL = ($where !== '') ? ' WHERE ' . $where : '';
     $orderbySQL = ($orderby !== '') ? ' ORDER BY ' . $orderby : '';
-    $sql = " SELECT " . $columnKey . " FROM " . $table . $whereSQL . $orderbySQL;
+    $limitSQL = ($limit !== '') ? ' LIMIT ' . $limit : '';
+
+    $sql = " SELECT " . $columnKey . " FROM " . $table . $whereSQL . $orderbySQL . $limitSQL;
 
     return $sql;
+  }
+
+  public function update($table, $data, $conditions)
+  {
+    $setPart = [];
+    $wherePart = [];
+    $params = [];
+    $paramTypes = '';
+
+    foreach ($data as $key => $value) {
+      $setPart[] = "$key = ?";
+      $params[] = $value;
+      $paramTypes .= 's';
+    }
+
+    foreach ($conditions as $key => $value) {
+      $wherePart[] = "$key = ?";
+      $params[] = $value;
+      $paramTypes .= 's';
+    }
+
+    $setStr = implode(', ', $setPart);
+    $whereStr = implode(' AND ', $wherePart);
+
+    $sql = "UPDATE $table SET $setStr WHERE $whereStr";
+    // var_dump($sql);
+    $stmt = $this->db_con->prepare($sql);
+
+    if (!$stmt) {
+      error_log("Prepare failed: " . $this->db_con->error);
+      return false;
+    }
+
+    $stmt->bind_param($paramTypes, ...$params);
+    $result = $stmt->execute();
+
+    $stmt->close();
+
+    return $result;
+  }
+
+
+  public function selectWithJoin($baseTable, $joinConditions, $columns, $where, $params, $types = '', $orderby = '', $limit = '')
+  {
+    $joinSQL = '';
+    foreach ($joinConditions as $condition) {
+      $joinSQL .= " JOIN " . $condition['joinTable'] . " ON " . $condition['on'];
+    }
+    $whereSQL = $where ? " WHERE $where " : '';
+    $orderbySQL = $orderby ? " ORDER BY $orderby " : '';
+    $limitSQL = $limit ? " LIMIT $limit " : '';
+
+    $sql = "SELECT $columns FROM $baseTable $joinSQL $whereSQL $orderbySQL $limitSQL";
+
+    $stmt = $this->db_con->prepare($sql);
+    if (!$stmt) {
+      error_log("Prepare failed: " . $this->db_con->error);
+      return false;
+    }
+
+    if (!empty($params) &&  !empty($types)) {
+      $stmt->bind_param($types, ...$params);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = $row;
+    }
+
+    $stmt->close();
+    return $data;
   }
 }

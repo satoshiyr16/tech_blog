@@ -35,3 +35,7 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+input[type="text"]:focus {
+  outline: 0;
+}

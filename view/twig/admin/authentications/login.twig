@@ -1,0 +1,18 @@
+{% extends "layouts/app.twig" %}
+
+{% block title %}管理 ログイン{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}authentications/login.css">
+{% endblock %}
+{% block content %}
+<h2>ログイン</h2>
+<form method="post" action="{{ CONTROLLER_ADMIN_DIR }}authentications/login.php">
+  <label for="email">メールアドレス:</label>
+  <input type="email" name="email" required>
+
+  <label for="password">パスワード:</label>
+  <input type="password" name="password" required>
+
+  <input type="submit" name="login" value="ログイン">
+</form>
+{% endblock %}

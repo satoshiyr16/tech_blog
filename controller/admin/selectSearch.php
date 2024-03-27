@@ -6,8 +6,10 @@ require_once '/Applications/MAMP/htdocs/tech_blog/controller/app/autoload.class.
 
 use controller\app\autoload;
 use model\dbCommand;
+use model\entities\post;
 
 $db = new dbCommand(autoload::DB_HOST, autoload::DB_USER, autoload::DB_PASS, autoload::DB_NAME);
+$post = new post($db);
 
 $loader = new \Twig_Loader_Filesystem(autoload::TWIG_ADMIN_DIR);
 $twig = new \Twig_Environment($loader, [
@@ -27,5 +29,5 @@ $twig->addGlobal('CONTROLLER_ADMIN_DIR', autoload::CONTROLLER_ADMIN_DIR);
 $twig->addGlobal('CSS_ADMIN_DIR', autoload::CSS_ADMIN_DIR);
 $twig->addGlobal('JS_ADMIN_DIR', autoload::JS_ADMIN_DIR);
 $twig->addGlobal('CSS_MODULE_DIR', autoload::CSS_MODULE_DIR);
-$template = $twig->load('index.twig');
+$template = $twig->load('selectSearch.twig');
 echo $template->render(['userName' => $userName]);

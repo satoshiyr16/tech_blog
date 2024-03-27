@@ -1,0 +1,23 @@
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 -検索-{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/selectSearch.css">
+{% endblock %}
+{% block loginedContent %}
+<div class="l-search_area">
+  <div class="l-dub_serh_btn">
+    <a class="serh_link" href="{{ APP_URL }}controller/admin/search/keywordSearch.php">
+      <i class="fa-solid fa-question fa-10x rotation"></i>
+      <p>キーワード検索</p>
+    </a>
+    <a class="serh_link" href="#">
+      <i class="fa-solid fa-tags fa-10x rotation"></i>
+      <p>タグ検索</p>
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+{% endblock %}

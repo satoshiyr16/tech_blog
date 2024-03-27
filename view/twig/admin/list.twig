@@ -1,0 +1,34 @@
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 一覧{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/list.css">
+{% endblock %}
+{% block loginedContent %}
+<div class="l-list_page_area">
+  <h2>投稿リスト</h2>
+  <div class="l-post_list_area">
+  {% for post in posts %}
+    <div class="post_content">
+      {% if post.heading_image is null %}
+          <img class="img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ post.title }}">
+      {% else %}
+          <img class="img" src="{{ post.heading_image }}" alt="{{ post.title }}">
+      {% endif %}
+      <p class="title">{{ post.title }}</p>
+      <div class="date_btn_group">
+        <p class="date">{{ post.updated_at | date('Y-m-d') }}</p>
+        <a href="{{ APP_URL }}controller/admin/edit.php?post_id={{ post.post_id }}" class="edit_btn">編集</a>
+        <form method="POST" action="{{ APP_URL }}controller/admin/delete.php" onsubmit="return confirm('削除してよろしいですか？');">
+          <input type="hidden" name="postId" value="{{ post.post_id }}">
+          <input type="submit" name="delete" class="delete_btn" value="削除">
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+{% endblock %}

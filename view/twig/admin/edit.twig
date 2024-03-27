@@ -1,0 +1,39 @@
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 投稿登録{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <script src="https://cdn.tiny.cloud/1/dtnfhme7mtnqfb2jb8u57wx7y6kqydp7io6i7a2jf6g8y77r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+      menubar: false,
+      plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons accordion',
+      toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+      quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+      contextmenu: "cut copy paste | bold italic underline | link image | bullist numlist",
+      toolbar_mode: 'sliding',
+    });
+  </script>
+{% endblock %}
+{% block loginedContent %}
+  <form action="{{ CONTROLLER_ADMIN_DIR }}update.php" method="post">
+    <div class="l-edit_group">
+      <h2>本文</h2>
+      <input type="text" name="title" value="{{ postDB.title }}">
+      <textarea
+        id="mytextarea"
+        name="content"
+        placeholder="ここに内容を入力してください"
+        style="width: 70%; height: 70vh;"
+      >
+      {{ postDB.content | e }}
+      </textarea>
+    </div>
+    <input type="hidden" name="postId" value="{{ postDB.post_id }}">
+    <input type="submit" name="update">
+    </form>
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+  <script src="{{ JS_ADMIN_DIR }}/addPost.js"></script>
+{% endblock %}

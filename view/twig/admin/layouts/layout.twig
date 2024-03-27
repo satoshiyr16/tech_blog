@@ -1,0 +1,63 @@
+{% extends "layouts/app.twig" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/layouts/layout.css">
+{% endblock %}
+
+{% block content %}
+  <div class="l-container">
+    <div class="l-nav_area">
+      <a href="{{ APP_URL }}controller/admin/index.php">
+      <div class="nav_title">
+        <h3>管理画面</h3>
+        <p>- TECH BLOG -</p>
+      </div>
+      </a>
+      <div class="user_info">
+        <div class="login_user">
+          <i class="fa-solid fa-circle-user fa-4x i_user"></i>
+          {% if userName %}
+            <p> {{ userName }} さん、こんにちは！</p>
+          {% else %}
+            <p>テスト さん、こんにちは！</p>
+          {% endif %}
+        </div>
+      </div>
+      <nav class="l-nav">
+        <ul>
+          <li><a href="{{ APP_URL }}controller/admin/index.php">
+            <i class="fa-solid fa-house nav_icon nav_i_home"></i><span class="nav_label nav_i_home">ホーム</span>
+          </a></li>
+          <li><a href="{{ APP_URL }}controller/admin/list.php">
+            <i class="fa-solid fa-envelope-open-text nav_icon"></i><span class="nav_label">投稿一覧</span>
+          </a></li>
+          <li><a href="{{ APP_URL }}controller/admin/addPost.php">
+            <i class="fa-solid fa-file nav_icon"></i><span class="nav_label">新規投稿</span>
+          </a></li>
+          <li><a href="{{ APP_URL }}controller/admin/search.php">
+            <i class="fa-solid fa-magnifying-glass nav_icon"></i><span class="nav_label">検索</span>
+          </a></li>
+          <li><a href="#">
+            <i class="fa-solid fa-chart-simple nav_icon"></i><span class="nav_label">データ</span>
+          </a></li>
+          <li><a href="#">
+            <i class="fa-solid fa-star nav_icon"></i><span class="nav_label">おすすめ記事設定</span>
+          </a></li>
+          <li><a href="#">
+            <i class="fa-solid fa-user nav_icon"></i><span class="nav_label">プロフィール</span>
+          </a></li>
+          <li><a href="#">
+            <i class="fa-solid fa-envelope nav_icon"></i><span class="nav_label">お問い合わせ</span>
+          </a></li>
+          <li><a href="{{ APP_URL }}controller/admin/authentications/logout.php">
+            <i class="fa-solid fa-right-from-bracket nav_icon"></i><span class="nav_label">ログアウト</span>
+          </a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="l-admin_content_area">
+      {% block loginedContent %}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}

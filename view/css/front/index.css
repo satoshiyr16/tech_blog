@@ -5,25 +5,6 @@ body {
   width: 100%;
 }
 
-div {
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  margin: 0;
-  padding: 0;
-}
-
-h2 {
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
 .l-container {
   position: relative;
   width: 100%;
@@ -144,6 +125,7 @@ nav li:hover {
 
 .l-recommend_post_area {
   border: 1px solid black;
+  border-radius: 5px;
   width: 70%;
   height: 70vh;
   margin: 0 50px;
@@ -172,7 +154,116 @@ nav li:hover {
 
 .l-menu_area {
   border: 1px solid black;
+  border-radius: 5px;
   width: 20%;
   height: 70vh;
   margin-left: 15px;
+}
+
+.l-message_area {
+  height: 35vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.l-post_filter_section {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.l-pos_fil_display {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 3s;
+}
+
+.pos_fil_area_title {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.pos_fil_con_area {
+  height: 85%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.pos_fil_content {
+  position: relative;
+  display: flex;
+  margin: 10px;
+}
+
+.pos_fil_img {
+  width: 20%;
+  height: 12.5%;
+  margin: 5px;
+}
+
+.pos_fil_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
+
+.pos_fil_date {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(0%) translateX(0%);
+  -webkit-transform: translateY(0%) translateX(0%);
+}
+
+.l-profile_area {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.l-prof_display {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 70%;
+  width: 70%;
+}
+
+.prof_title {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+}
+
+.prof_content {
+  height: 85%;
+  width: 100%;
+}
+
+/* js */
+.fadeIn {
+  opacity: 1;
 }

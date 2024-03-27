@@ -1,0 +1,52 @@
+{% extends "layouts/layout.twig" %}
+{% block title %}管理 -検索-{% endblock %}
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ CSS_ADMIN_DIR }}/search.css">
+{% endblock %}
+{% block loginedContent %}
+<div class="l-search_page_area">
+  <div class="l-section_title">
+    <h2>投稿検索</h2>
+  </div>
+  <form method="get" action="{{ CONTROLLER_ADMIN_DIR }}search.php">
+  <div class="l-srch_form_area">
+    <div class="keyword_form">
+      <p class="srch_section_title">キーワード検索</p>
+      <input type="text" name="keyword" class="inp_keyword"  value="{{ keyword }}">
+    </div>
+    <div class="tag_form">
+      <p class="srch_section_title">タグを選択</p>
+      {% for tag in allTags %}
+        <label>
+        <input type="checkbox" name="tags[]" value="{{ tag.tag_id }}" {% if tag.tag_id in selectedTags %}checked{% endif %}>
+        <span># {{ tag.tag_name }}</span>
+      {% endfor %}
+    </div>
+    <div class="srch_btn_area">
+      <input type="submit" class="srch_btn" name="search" value="検索">
+    </div>
+  </div>
+  </form>
+  <div class="l-srch_result_area">
+  {% for result in results %}
+    <div class="srch_rslt_content">
+      {% if rec_post.heading_image is null %}
+          <img class="rslt_img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ result.title }}">
+      {% else %}
+          <img class="rslt_img" src="{{ result.heading_image }}" alt="{{ result.title }}">
+      {% endif %}
+      <p class="rslt_title">{{ result.title }}</p>
+      <div class="date_btn_group">
+        <p class="rslt_date">{{ result.updated_at | date('Y-m-d') }}</p>
+        <a href="{{ APP_URL }}controller/admin/edit.php?post_id={{ result.post_id }}" class="edit_btn">編集</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+  {{ parent() }}
+{% endblock %}

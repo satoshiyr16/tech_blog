@@ -4,9 +4,10 @@
   {{ parent() }}
   <link rel="stylesheet" href="{{ CSS_FRONT_DIR }}/index.css">
   <link rel="stylesheet" href="{{ CSS_FRONT_DIR }}/commons/wave.css">
+  <link rel="stylesheet" href="{{ CSS_FRONT_DIR }}/commons/typing.css">
 {% endblock %}
 {% block content %}
-  <div class="l-container">
+<div class="l-container">
   <div class="wave">
     <canvas id="waveCanvas"></canvas>
   </div>
@@ -36,28 +37,74 @@
   </div>
   <div class="l-enhancement_section">
     <div class="l-recommend_post_area">
-      {% for post in posts %}
+      {% for rec_post in rec_posts %}
       <div class="rec_post_content">
-      <a href="{{ APP_URL }}/controller/front/detail.php?post_id={{ post.post_id }}">
-        {% if post.heading_image is null %}
-            <img class="rec_img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ post.title }}">
+      <a href="{{ APP_URL }}controller/front/detail.php?post_id={{ rec_post.post_id }}">
+        {% if rec_post.heading_image is null %}
+            <img class="rec_img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ rec_post.title }}">
         {% else %}
-            <img class="rec_img" src="{{ post.heading_image }}" alt="{{ post.title }}">
+            <img class="rec_img" src="{{ rec_post.heading_image }}" alt="{{ rec_post.title }}">
         {% endif %}
-        <h2 class="rec_title">{{ post.title }}</h2>
+        <h2 class="rec_title">{{ rec_post.title }}</h2>
       </a>
       </div>
       {% endfor %}
     </div>
     <div class="l-menu_area">
     </div>
+  </div>
+  <div class="l-message_area">
+    <p class="TextTyping">プログラミングスキル・キャリア・人生観など<br>あなたのITリテラシーを向上させます</p>
+  </div>
+  <div class="l-post_filter_section">
+    <div class="l-pos_fil_display">
+      <p class="pos_fil_area_title">NEW</p>
+      <div class="pos_fil_con_area">
+        {% for new_post in new_posts %}
+        <a href="{{ APP_URL }}controller/front/detail.php?post_id={{ new_post.post_id }}">
+        <div class="pos_fil_content">
+          {% if new_post.heading_image is null %}
+            <img class="pos_fil_img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ new_post.title }}">
+          {% else %}
+            <img class="pos_fil_img" src="{{ new_post.heading_image }}" alt="{{ new_post.title }}">
+          {% endif %}
+          <p class="pos_fil_title">{{ new_post.title }}</p>
+          <p class="pos_fil_date">{{ new_post.updated_at | date('Y-m-d') }}</p>
+        </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="l-pos_fil_display">
+      <p class="pos_fil_area_title">Programing</p>
+      <div class="pos_fil_con_area">
+        {% for tag_post in tag_posts %}
+        <a href="{{ APP_URL }}controller/front/detail.php?post_id={{ tag_post.post_id }}">
+        <div class="pos_fil_content">
+          {% if tag_post.heading_image is null %}
+            <img class="pos_fil_img" src="{{ IMAGE_DIR }}/post.sample.1.png" alt="{{ tag_post.title }}">
+          {% else %}
+            <img class="pos_fil_img" src="{{ tag_post.heading_image }}" alt="{{ tag_post.title }}">
+          {% endif %}
+          <p class="pos_fil_title">{{ tag_post.title }}</p>
+          <p class="pos_fil_date">{{ tag_post.updated_at | date('Y-m-d') }}</p>
+        </div>
+        </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
-  <div class="" style="height: 700px;">
-    <p>タイポデザイン  人生・スキル・...</p>
+  <div class="l-profile_area">
+    <div class="l-prof_display">
+      <p class="prof_title">Profile</p>
+      <div class="prof_content"></div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 {% block scripts %}
   {{ parent() }}
   <script src="{{ JS_FRONT_DIR }}/commons/wave.js"></script>
+  <script src="{{ JS_FRONT_DIR }}/commons/typing.js"></script>
+  <script src="{{ JS_FRONT_DIR }}/index.js"></script>
 {% endblock %}
