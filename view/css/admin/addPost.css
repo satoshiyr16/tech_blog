@@ -1,4 +1,4 @@
-.l-container {
+.l-add_post_area {
   height: 100vh;
   width: 100%;
   overflow: hidden;
@@ -26,9 +26,10 @@
 
 .l-input_group h2 {
   /* border: 1px solid black; */
-  font-size: 50px;
+  font-size: 40px;
   margin: 10px auto;
   height: 20%;
+  color: rgb(148, 148, 148);
 }
 
 .title_group {
@@ -120,8 +121,9 @@
 }
 
 .l-edit_group h2 {
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 10px;
+  color: rgb(148, 148, 148);
 }
 
 .l-submit_area {
